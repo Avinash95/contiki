@@ -2,6 +2,10 @@ ifndef CONTIKI
   $(error CONTIKI not defined! You must specify where CONTIKI resides!)
 endif
 
+ifndef CONTIKI_PROJECT
+  $(error CONTIKI_PROJECT not defined! You must specify project name!)
+endif
+
 PIC32_MODEL=32MX470F512H
 
 CONTIKI_PLAT_DEFS += -D __USE_TIMER__
@@ -54,11 +58,17 @@ include $(CONTIKI)/cpu/pic32/Makefile.pic32
 CUSTOM_RULE_LINK=1
 
 ### CPU-dependent cleanup files
-CLEAN += *.hex
+CLEAN += *.hex *.$(TARGET)
 
-%.$(TARGET): %.co $(PROJECT_OBJECTFILES) $(PROJECT_LIBRARIES) contiki-$(TARGET).a
+.PHONY: bin2hex
+
+all: $(CONTIKI_PROJECT).$(TARGET) bin2hex
+
+$(CONTIKI_PROJECT).$(TARGET): $(CONTIKI_PROJECT).co $(PROJECT_OBJECTFILES) $(PROJECT_LIBRARIES) contiki-$(TARGET).a
 	$(TRACE_LD)
 	$(Q)$(LD) $(LDFLAGS) $(TARGET_STARTFILES) ${filter-out %.a,$^} ${filter %.a,$^} $(TARGET_LIBFILES) -o $@
-	xc32-bin2hex $@
+
+bin2hex:
+	xc32-bin2hex $(CONTIKI_PROJECT).$(TARGET)
 
 
