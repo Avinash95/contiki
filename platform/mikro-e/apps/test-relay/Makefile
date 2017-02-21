@@ -1,9 +1,7 @@
 CONTIKI_PROJECT = test-relay
 CONTIKI = ../../../..
 
-ifndef TARGET
-TARGET = mikro-e
-endif
+TARGET ?= mikro-e
 CFLAGS += -DRELAY_CLICK
 
 APPS += relay-click

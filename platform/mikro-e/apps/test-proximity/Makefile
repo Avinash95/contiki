@@ -3,9 +3,7 @@ CONTIKI = ../../../..
 
 PROXIMITY_CLICK = proximity-click
 
-ifndef TARGET
-TARGET = mikro-e
-endif
+TARGET ?= mikro-e
 
 CFLAGS += -DPROXIMITY_CLICK
 

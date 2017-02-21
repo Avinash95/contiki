@@ -1,6 +1,6 @@
 CONTIKI=../../../../
 
-TARGET = mikro-e
+TARGET ?= mikro-e
 VERSION? = $(shell git describe --abbrev=4 --dirty --always --tags)
 
 CFLAGS += -DVERSION=$(VERSION)
@@ -10,7 +10,8 @@ CFLAGS += -fno-short-double
 LDFLAGS += -Wl,--defsym,_min_heap_size=32000
 
 SMALL=0
+CONTIKI_PROJECT = main
 
-all: main
+all: $(CONTIKI_PROJECT)
 
 include $(CONTIKI)/Makefile.include

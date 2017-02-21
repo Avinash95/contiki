@@ -2,9 +2,7 @@ CONTIKI_PROJECT = test-led
 
 CONTIKI = ../../../../
 
-ifndef TARGET
-TARGET = mikro-e
-endif
+TARGET ?= mikro-e
 
 all: $(CONTIKI_PROJECT)
 

@@ -1,9 +1,7 @@
 CONTIKI_PROJECT = test-button
-ifndef TARGET
-TARGET = mikro-e
-endif
+TARGET ?= mikro-e
 CONTIKI = ../../../../
 CFLAGS += -I $(CONTIKI)/platform/$(TARGET)/
-all: test-button
+all: $(CONTIKI_PROJECT)
 
 include $(CONTIKI)/Makefile.include

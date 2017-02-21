@@ -3,9 +3,7 @@ CONTIKI = ../../../..
 
 CFLAGS += -DMOTION_CLICK
 
-ifndef TARGET
-TARGET = mikro-e
-endif
+TARGET ?= mikro-e
 
 APPS += motion-click
 APPDIRS += ../../dev
